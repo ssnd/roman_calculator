@@ -2,41 +2,28 @@
 
 #include <iostream>
 
-std::string RomanConverter::MinusDigit(char one, char five, char ten, int64_t x) {
-  if (x <= 3) {
-    return std::string().assign(x, one);
-  }
-  if (x <= 5) {
-    return std::string().assign(5 - x, one) + five;
-  }
-  if (x <= 8) {
-    return five + std::string().assign(x - 5, one);
-  }
-  return std::string().assign(10 - x, one) + ten;
-}
+std::string RomanConverter::DecimalToRoman(int64_t value) {
+  struct roman_t { unsigned int value; char const *numeral; };
+  roman_t roman_map[] =
+      {
+          {1000, "M"}, {900, "CM"},
+          {500, "D"}, {400, "CD"},
+          {100, "C"}, {90, "XC"},
+          {50, "L"}, {40, "XL"},
+          {10, "X"}, {9, "IX"},
+          {5, "V"}, {4, "IV"},
+          {1, "I"},
+          {0, NULL} // end marker
+      };
 
-std::string RomanConverter::DecimalToRoman(int64_t x) {
-  assert(x >= 0);
-  assert (x<=1000000000);
-  if (x == 0) {
-    return "Z";
+  std::string result;
+  for (roman_t *current = roman_map; current->value > 0; ++current) {
+    while (value >= current->value) {
+      result += current->numeral;
+      value -= current->value;
+    }
   }
-
-  if (x >= 1000) {
-    return x - 1000 > 0 ? "M" + DecimalToRoman(x - 1000) : "M";
-  }
-
-  if (x >= 100) {
-    std::string d = MinusDigit('C', 'D', 'M', x / 100);
-    return x % 100 > 0 ? d + DecimalToRoman(x % 100) : d;
-  }
-
-  if (x >= 10) {
-    std::string d = MinusDigit('X', 'L', 'C', x / 10);
-    return x % 10 > 0 ? d + DecimalToRoman(x % 10) : d;
-  }
-
-  return MinusDigit('I', 'V', 'X', x);
+  return result;
 }
 
 int64_t RomanConverter::RomanValue(char r) {

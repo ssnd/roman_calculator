@@ -7,13 +7,13 @@
 #include "Calculator.h"
 #include "Result.h"
 
-template <typename T>
+template<typename T>
 T sgn(T x) {
   if (x == 0) {
     return 1;
   }
 
-  return x/abs(x);
+  return x / abs(x);
 }
 
 Result<std::string> ExpressionToDecimal(const std::string &input) {
@@ -57,14 +57,12 @@ Result<std::string> ExpressionToDecimal(const std::string &input) {
   return final_result;
 }
 
-
-void CalculateResult(const std::string & input) {
+void CalculateResult(const std::string &input) {
   auto expr_with_decimals = ExpressionToDecimal(input);
   if (expr_with_decimals.HasError()) {
     std::cout << "error: " << expr_with_decimals.ErrorDesc() << std::endl;
     return;
   }
-
   auto result = Calculator::CalculateResult(expr_with_decimals.GetValue());
   if (result.HasError()) {
     std::cout << "error: " << result.ErrorDesc() << std::endl;
