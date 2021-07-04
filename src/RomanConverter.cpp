@@ -1,6 +1,7 @@
+#include <iostream>
+
 #include "RomanConverter.hpp"
 
-#include <iostream>
 
 std::string RomanConverter::DecimalToRoman(int64_t value) {
   struct roman_t { unsigned int value; char const *numeral; };
@@ -23,8 +24,10 @@ std::string RomanConverter::DecimalToRoman(int64_t value) {
       value -= current->value;
     }
   }
+
   return result;
 }
+
 
 int64_t RomanConverter::RomanValue(char r) {
   switch (r) {
@@ -41,8 +44,10 @@ int64_t RomanConverter::RomanValue(char r) {
 
 }
 
+
 int64_t RomanConverter::RomanToDecimal(const std::string &input) {
   int64_t result = 0;
+  
   for (size_t i = 0; i < input.size(); ++i) {
     int current_value = RomanValue(input[i]);
 
