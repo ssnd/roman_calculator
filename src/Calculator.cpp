@@ -1,6 +1,7 @@
 #include "Calculator.hpp"
 
 #include <iostream>
+#include <algorithm>
 
 int Calculator::OperatorPriority(const std::string &ch) {
   if (ch == "+" || ch == "-") {
