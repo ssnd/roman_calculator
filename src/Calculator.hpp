@@ -5,7 +5,7 @@
 #include <stack>
 #include <iostream>
 
-#include "Result.h"
+#include "Result.hpp"
 
 enum class TokenType {
   OPERATOR,

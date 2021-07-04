@@ -3,9 +3,9 @@
 
 #include <string>
 #include <stdlib.h>
-#include "RomanConverter.h"
-#include "Calculator.h"
-#include "Result.h"
+#include "RomanConverter.hpp"
+#include "Calculator.hpp"
+#include "Result.hpp"
 
 template<typename T>
 T sgn(T x) {

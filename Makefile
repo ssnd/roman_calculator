@@ -1,5 +1,5 @@
 compile:
-	g++ -std=c++17 -Werror -Wall -Wextra -Wpedantic -o calc *.cpp
+	g++ -std=c++17 -Werror -Wall -Wextra -Wpedantic -o calc src/*.cpp
 launch:
 	./calc
 run: compile launch
