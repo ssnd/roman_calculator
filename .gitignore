@@ -1,3 +1,8 @@
+### Bin ###
 calc
+
+### Cmake ###
 cmake-build-debug
+
+### IDE ###
 .idea
