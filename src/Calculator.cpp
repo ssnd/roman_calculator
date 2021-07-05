@@ -1,6 +1,8 @@
-#include "Calculator.h"
-
 #include <iostream>
+#include <algorithm>
+
+#include "Calculator.hpp"
+
 
 int Calculator::OperatorPriority(const std::string &ch) {
   if (ch == "+" || ch == "-") {
@@ -14,9 +16,11 @@ int Calculator::OperatorPriority(const std::string &ch) {
   }
 }
 
+
 bool Calculator::IsNumber(const std::string &s) {
   return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
+
 
 Result<std::vector<Token>> Calculator::InfixToPostfix(const std::vector<Token> &infix) {
   Result<std::vector<Token>> result;
@@ -68,10 +72,13 @@ Result<std::vector<Token>> Calculator::InfixToPostfix(const std::vector<Token> &
     Token top = stack.top();
     if (top.token != "(") {
       postfix.emplace_back(top);
+
     }
     stack.pop();
   }
+
   result.SetValue(std::move(postfix));
+
   return result;
 }
 

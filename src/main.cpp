@@ -3,9 +3,11 @@
 
 #include <string>
 #include <stdlib.h>
-#include "RomanConverter.h"
-#include "Calculator.h"
-#include "Result.h"
+
+#include "RomanConverter.hpp"
+#include "Calculator.hpp"
+#include "Result.hpp"
+
 
 template<typename T>
 T sgn(T x) {
@@ -15,6 +17,7 @@ T sgn(T x) {
 
   return x / abs(x);
 }
+
 
 Result<std::string> ExpressionToDecimal(const std::string &input) {
   std::string buff;
@@ -57,26 +60,32 @@ Result<std::string> ExpressionToDecimal(const std::string &input) {
   return final_result;
 }
 
+
 void CalculateResult(const std::string &input) {
   auto expr_with_decimals = ExpressionToDecimal(input);
   if (expr_with_decimals.HasError()) {
     std::cout << "error: " << expr_with_decimals.ErrorDesc() << std::endl;
     return;
   }
+  
   auto result = Calculator::CalculateResult(expr_with_decimals.GetValue());
   if (result.HasError()) {
     std::cout << "error: " << result.ErrorDesc() << std::endl;
     return;
   }
+
   // no errors
   std::cout << (sgn(result.GetValue()) == -1 ? "-" : "");
   std::cout << RomanConverter::DecimalToRoman(abs(result.GetValue())) << std::endl;
 
 }
+
+
 int main() {
   std::string line;
   while (std::getline(std::cin, line)) {
     CalculateResult(line);
   }
+
   return 0;
 }
